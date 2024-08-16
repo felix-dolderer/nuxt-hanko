@@ -16,6 +16,7 @@ export interface ModuleOptions {
   apiURL?: string
   registerComponents?: boolean
   augmentContext?: boolean
+  globalMiddleware?: boolean
   cookieName?: string
   redirects?: {
     login?: string
@@ -34,6 +35,7 @@ export default defineNuxtModule<ModuleOptions>({
     apiURL: '',
     registerComponents: true,
     augmentContext: true,
+    globalMiddleware: false,
     cookieName: 'hanko',
     redirects: {
       login: '/login',
@@ -83,6 +85,14 @@ export default defineNuxtModule<ModuleOptions>({
         references.push({
           path: resolver.resolve('./runtime/auth.d.ts'),
         })
+      })
+    }
+
+    if (options.globalMiddleware) {
+      addRouteMiddleware({
+        name: 'hanko-global-logged-in',
+        path: resolver.resolve('./runtime/middleware/global-logged-in'),
+        global: true,
       })
     }
 
