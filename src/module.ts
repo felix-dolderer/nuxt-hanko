@@ -1,7 +1,15 @@
-import type { PublicRuntimeConfig } from 'nuxt/schema'
-import { defineNuxtModule, addPlugin, createResolver, addImportsSources, addRouteMiddleware, addServerHandler, addTemplate } from '@nuxt/kit'
+import {
+  addImportsSources,
+  addPlugin,
+  addRouteMiddleware,
+  addServerHandler,
+  addTemplate,
+  createResolver,
+  defineNuxtModule,
+} from '@nuxt/kit'
 import type { CookieSameSite, RegisterOptions } from '@teamhanko/hanko-elements'
 import { defu } from 'defu'
+import type { PublicRuntimeConfig } from 'nuxt/schema'
 
 export interface ModuleOptions {
   /**
@@ -140,7 +148,7 @@ export default defineNuxtModule<ModuleOptions>({
     })
 
     // Add Nitro composables
-    nuxt.hook('nitro:config', (config) => {
+    nuxt.hook('nitro:config', config => {
       config.externals = defu(config.externals, {
         inline: [resolver.resolve('./runtime/server')],
       })

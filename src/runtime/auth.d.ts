@@ -17,3 +17,21 @@ declare module 'h3' {
     hanko?: HankoPayload
   }
 }
+
+declare module 'nuxt/dist/pages/composables' {
+  interface PageMeta {
+    hanko?: {
+      allow: 'all' | 'logged-in' | 'logged-out'
+      deny: 'logged-in' | 'logged-out'
+    }
+  }
+}
+
+declare module '#app' {
+  interface PageMeta {
+    hanko?: {
+      allow: 'all' | 'logged-in' | 'logged-out'
+      deny: 'logged-in' | 'logged-out'
+    }
+  }
+}

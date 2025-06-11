@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
-  middleware: ['hanko-allow-all'],
+  middleware: 'hanko-allow-all',
 })
 </script>
 

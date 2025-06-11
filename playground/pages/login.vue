@@ -1,19 +1,19 @@
 <script setup lang="ts">
-definePageMeta({
-  middleware: ['hanko-logged-out'],
-})
+definePageMeta({ hanko: { allow: 'logged-out' } })
 </script>
 
 <template>
   <main>
     <h1>Log in</h1>
-    <p>
-      Only logged out users can see this page<pre>definePageMeta({
+    <p>Only logged out users can see this page</p>
+    <pre>
+definePageMeta({
   middleware: ['hanko-logged-out'],
-})</pre>
-    </p>
+})</pre
+    >
     <p v-if="$route.query.redirect">
-      You were redirected here from {{ $route.query.redirect }}, once you login, you'll be sent back automatically!
+      You were redirected here from {{ $route.query.redirect }}, once you login, you'll be sent back
+      automatically!
     </p>
     <hanko-auth />
   </main>

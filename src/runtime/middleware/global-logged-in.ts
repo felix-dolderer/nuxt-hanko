@@ -6,18 +6,11 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 
   // Don't trigger on client-side navigation on the same-page
   // (changes in to.query or to.hash)
-  if (!import.meta.server && to.path === from.path) return true
+  if (import.meta.client && to.path === from.path) return true
 
   // If a hanko middleware is explicitly set, that middleware handles
   // navigation and the default hankoLoggedIn is skipped
-  if (Array.isArray(to.meta.middleware)) {
-    if (to.meta.middleware.some(isHankoMiddleware)) {
-      return true
-    }
-  }
-  else if (isHankoMiddleware(to.meta.middleware)) {
-    return true
-  }
+  if ([to.meta.middleware].flat().some(isHankoMiddleware)) return true
 
   // If no hanko middleware is set, default to hankoLoggedIn
   return await hankoLoggedIn(to, from)
@@ -35,7 +28,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
  */
 const isHankoMiddleware = (middleware: unknown) => {
   return (
-    typeof middleware === 'string'
-    && ['hanko-allow-all', 'hanko-logged-in', 'hanko-logged-out'].includes(middleware)
+    typeof middleware === 'string' &&
+    ['hanko-allow-all', 'hanko-logged-in', 'hanko-logged-out'].includes(middleware)
   )
 }

@@ -12,6 +12,9 @@ export default defineNuxtConfig({
       ],
     },
   },
+  experimental: {
+    extraPageMetaExtractionKeys: ['hanko'],
+  },
   compatibilityDate: '2024-08-19',
   hanko: {
     // You need to provide the Hanko API URL in order for it to work

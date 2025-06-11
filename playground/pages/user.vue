@@ -1,7 +1,5 @@
 <script setup lang="ts">
-definePageMeta({
-  middleware: ['hanko-logged-in'],
-})
+definePageMeta({ hanko: { allow: 'logged-in' } })
 
 const hanko = useHanko()
 function logout() {
@@ -19,17 +17,14 @@ async function tryAuthenticatedRequest() {
 <template>
   <main>
     <h1>You are logged in!</h1>
-    <p>
-      Only logged in users can see this page<pre>definePageMeta({
+    <p>Only logged in users can see this page</p>
+    <pre>
+definePageMeta({
   middleware: ['hanko-logged-in'],
-})</pre>
-    </p>
-    <button @click="logout">
-      Log me out
-    </button>
-    <button @click="tryAuthenticatedRequest">
-      Try an auth request
-    </button>
+})</pre
+    >
+    <button @click="logout">Log me out</button>
+    <button @click="tryAuthenticatedRequest">Try an auth request</button>
     <pre>{{ result }}</pre>
   </main>
 </template>
